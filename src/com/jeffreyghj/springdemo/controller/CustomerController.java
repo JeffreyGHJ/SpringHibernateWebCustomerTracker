@@ -8,24 +8,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jeffreyghj.springdemo.dao.CustomerDAO;
 import com.jeffreyghj.springdemo.entity.Customer;
+import com.jeffreyghj.springdemo.service.CustomerService;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
 
-	
 	@Autowired
-	private CustomerDAO customerDAO; //will scan for a component that implements the CustomerDAO which will be CustomerDAOImpl
+	private CustomerService customerService; //will receive CustomerServiceImpl.java as object (not CustomerService.java; that's an interface)
 	
-	//@GetMapping("/list")
-	@RequestMapping("/list")
+
+	@GetMapping("/list")
 	public String listCustomers(Model theModel) {
 		
 		
 		//get customers from dao
-		List<Customer> theCustomers = customerDAO.getCustomers(); 
+		List<Customer> theCustomers = customerService.getCustomers(); 
 		
 		//add customers to spring MVC model
 		theModel.addAttribute("customers", theCustomers);
