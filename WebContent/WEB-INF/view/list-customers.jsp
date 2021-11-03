@@ -7,11 +7,10 @@
 	
 	<!-- refrence css styles -->
 	
-	<!--  
 	<link type="text/css" 
 		  rel="stylesheet" 
 		  href="${pageContext.request.contextPath}/resources/css/style.css" />
-	-->
+		  
 </head>
 
 <body>
@@ -25,7 +24,6 @@
 	<div id="container">
 		<div id="content">
 			<!-- add our html table here -->
-			<!--  
 			<table>
 				<tr>
 					<th>First Name</th>
@@ -44,7 +42,6 @@
 				</c:forEach>
 				
 			</table>
-			-->
 			
 		</div>
 	</div>
