@@ -18,8 +18,8 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	@Transactional //use transactional on the service layer (here) if you want DAO methods to run in same transaction
-	public List<Customer> getCustomers() {
-		return customerDAO.getCustomers();
+	public List<Customer> getCustomers(int theSortField) {
+		return customerDAO.getCustomers(theSortField);
 	}
 
 	@Override
