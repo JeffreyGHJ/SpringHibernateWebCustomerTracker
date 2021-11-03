@@ -17,9 +17,15 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDAO customerDAO; //will receive customerDAOImpl because that is a class that implements CustomerDAO
 	
 	@Override
-	@Transactional
+	@Transactional //use transactional on the service layer (here) if you want DAO methods to run in same transaction
 	public List<Customer> getCustomers() {
 		return customerDAO.getCustomers();
+	}
+
+	@Override
+	@Transactional
+	public void saveCustomer(Customer theCustomer) {
+		customerDAO.saveCustomer(theCustomer);
 	}
 
 }
