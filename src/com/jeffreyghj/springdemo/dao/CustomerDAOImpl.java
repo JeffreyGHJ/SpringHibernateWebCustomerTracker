@@ -24,7 +24,8 @@ public class CustomerDAOImpl implements CustomerDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		//create query
-		Query<Customer> theQuery = currentSession.createQuery("from Customer", Customer.class); 
+		Query<Customer> theQuery = currentSession.createQuery("from Customer order by lastName", 
+															  Customer.class); 
 		
 		//execute query
 		List<Customer> customers = theQuery.getResultList();
@@ -36,7 +37,29 @@ public class CustomerDAOImpl implements CustomerDAO {
 	@Override
 	public void saveCustomer(Customer theCustomer) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		currentSession.save(theCustomer);
+		currentSession.saveOrUpdate(theCustomer);
+	}
+
+	@Override
+	public Customer getCustomer(int theId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		return currentSession.get(Customer.class, theId);
+	}
+
+	@Override
+	public void deleteCustomer(int theId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		/*
+		Customer theCustomer = currentSession.get(Customer.class, theId);
+		currentSession.delete(theCustomer);
+		*/
+		
+		//these two lines basically give us "delete from Customer where id:=theId"
+		Query theQuery = currentSession.createQuery("delete from Customer where id=:customerId");
+		theQuery.setParameter("customerId", theId);
+		
+		theQuery.executeUpdate();
 	}
 
 }
